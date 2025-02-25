@@ -18,10 +18,12 @@ namespace Assignment1_EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Department>().Property(d => d.name).IsRequired();
         }
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Topic> Topics { get; set; }
     }
 }
