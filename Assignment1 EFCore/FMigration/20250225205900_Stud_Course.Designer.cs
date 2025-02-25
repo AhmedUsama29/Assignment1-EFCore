@@ -4,6 +4,7 @@ using Assignment1_EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1_EFCore.FMigration
 {
     [DbContext(typeof(itiDBContext))]
-    partial class itiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250225205900_Stud_Course")]
+    partial class Stud_Course
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,22 +51,6 @@ namespace Assignment1_EFCore.FMigration
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Assignment1_EFCore.Course_Inst", b =>
-                {
-                    b.Property<int>("inst_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("course_id")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("evaluate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("inst_id", "course_id");
-
-                    b.ToTable("Course_Insts");
-                });
-
             modelBuilder.Entity("Assignment1_EFCore.Department", b =>
                 {
                     b.Property<int>("id")
@@ -87,40 +74,6 @@ namespace Assignment1_EFCore.FMigration
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("Assignment1_EFCore.Instructor", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<decimal>("Bonus")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Dept_id")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("HourRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Instructors");
-                });
-
             modelBuilder.Entity("Assignment1_EFCore.Stud_Course", b =>
                 {
                     b.Property<int>("stud_id")
@@ -135,7 +88,7 @@ namespace Assignment1_EFCore.FMigration
 
                     b.HasKey("stud_id", "course_id");
 
-                    b.ToTable("Stud_Courses");
+                    b.ToTable("Stud_Course");
                 });
 
             modelBuilder.Entity("Assignment1_EFCore.Student", b =>
