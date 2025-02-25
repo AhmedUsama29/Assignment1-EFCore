@@ -20,5 +20,8 @@ namespace Assignment1_EFCore
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

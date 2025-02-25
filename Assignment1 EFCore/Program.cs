@@ -4,7 +4,12 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            //Mapping Student using convention
+
+            using (itiDBContext itiDBContext = new itiDBContext()) 
+            {
+
+            }
         }
     }
 }
