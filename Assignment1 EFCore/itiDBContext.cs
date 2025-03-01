@@ -27,6 +27,22 @@ namespace Assignment1_EFCore
             } );
 
             modelBuilder.Entity<Course_Inst>().HasKey(ci => new { ci.inst_id, ci.course_id });
+
+            modelBuilder.Entity<Course>()
+                        .HasOne(c => c.Topic)
+                        .WithMany(t => t.Courses)
+                        .HasForeignKey(c => c.Topicid);
+
+            modelBuilder.Entity<Department>()
+                        .HasMany(d => d.Instructors)
+                        .WithOne(i => i.Department)
+                        .HasForeignKey(i => i.Dept_id);
+
+            modelBuilder.Entity<Department>()
+                        .HasOne(d => d.Manager)
+                        .WithOne(i => i.ManagedDepartment)
+                        .HasForeignKey<Department>(d => d.Instructorid)
+                        .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Student> Students { get; set; }

@@ -16,7 +16,9 @@ namespace Assignment1_EFCore
         public required string name { get; set; }
 
         public string? Description { get; set; }
-        public int Top_id { get; set; }
+        public int Topicid { get; set; }
+
+        public Topic Topic { get; set; }
 
     }
 }

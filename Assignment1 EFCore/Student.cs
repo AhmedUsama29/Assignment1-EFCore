@@ -13,7 +13,9 @@ namespace Assignment1_EFCore
         public required string LName { get; set; }
         public string? Address { get; set; }
         public short? Age { get; set; }
-        public int Dep_id { get; set; }
+        public int Departmentid { get; set; }
+
+        public Department Department { get; set; }
 
     }
 }
