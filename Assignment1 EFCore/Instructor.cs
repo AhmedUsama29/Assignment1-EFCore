@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,10 @@ namespace Assignment1_EFCore
         public decimal HourRate { get; set; }
 
         public int Dept_id { get; set; }
+
+        public Department Department { get; set; }
+        [InverseProperty(nameof(Assignment1_EFCore.Department.Manager))]
+        public Department ManagedDepartment { get; set; }
+
     }
 }

@@ -4,6 +4,7 @@ using Assignment1_EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1_EFCore.FMigration
 {
     [DbContext(typeof(itiDBContext))]
-    partial class itiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250301140000_CourseTopic")]
+    partial class CourseTopic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,7 +80,7 @@ namespace Assignment1_EFCore.FMigration
                     b.Property<DateOnly>("HiringDate")
                         .HasColumnType("date");
 
-                    b.Property<int?>("Instructorid")
+                    b.Property<int>("ins_id")
                         .HasColumnType("int");
 
                     b.Property<string>("name")
@@ -85,10 +88,6 @@ namespace Assignment1_EFCore.FMigration
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("Instructorid")
-                        .IsUnique()
-                        .HasFilter("[Instructorid] IS NOT NULL");
 
                     b.ToTable("Departments");
                 });
@@ -123,8 +122,6 @@ namespace Assignment1_EFCore.FMigration
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("Dept_id");
 
                     b.ToTable("Instructors");
                 });
@@ -206,27 +203,6 @@ namespace Assignment1_EFCore.FMigration
                     b.Navigation("Topic");
                 });
 
-            modelBuilder.Entity("Assignment1_EFCore.Department", b =>
-                {
-                    b.HasOne("Assignment1_EFCore.Instructor", "Manager")
-                        .WithOne("ManagedDepartment")
-                        .HasForeignKey("Assignment1_EFCore.Department", "Instructorid")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Manager");
-                });
-
-            modelBuilder.Entity("Assignment1_EFCore.Instructor", b =>
-                {
-                    b.HasOne("Assignment1_EFCore.Department", "Department")
-                        .WithMany("Instructors")
-                        .HasForeignKey("Dept_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
             modelBuilder.Entity("Assignment1_EFCore.Student", b =>
                 {
                     b.HasOne("Assignment1_EFCore.Department", "Department")
@@ -240,15 +216,7 @@ namespace Assignment1_EFCore.FMigration
 
             modelBuilder.Entity("Assignment1_EFCore.Department", b =>
                 {
-                    b.Navigation("Instructors");
-
                     b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("Assignment1_EFCore.Instructor", b =>
-                {
-                    b.Navigation("ManagedDepartment")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Assignment1_EFCore.Topic", b =>

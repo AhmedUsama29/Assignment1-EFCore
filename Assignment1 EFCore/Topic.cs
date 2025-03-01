@@ -14,5 +14,7 @@ namespace Assignment1_EFCore
 
         [Required]
         public string name { get; set; }
+
+        public ICollection<Course> Courses { get; set; }
     }
 }
